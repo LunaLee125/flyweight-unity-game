@@ -1,0 +1,4 @@
+repository "flyweight_unity_game@lunalee251@cloud"
+  path "/"
+    br "/main"
+    co "/main"
