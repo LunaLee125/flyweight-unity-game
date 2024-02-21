@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//private GameObject block;
-
-public class RotatePiece : MonoBehaviour
+public class ActivePieceControl : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,10 +13,14 @@ public class RotatePiece : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        mousePos.z = 0;
+        transform.position = mousePos;
+
         if (Input.GetKeyDown("r"))
         {
-            Vector2 rotationToAdd = new Vector2(90, 0);
-            transform.Rotate(rotationToAdd);
+            transform.Rotate(new Vector3(0, 0, 90));
         }
     }
 }
