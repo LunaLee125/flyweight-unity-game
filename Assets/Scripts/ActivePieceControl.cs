@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ActivePieceControl : MonoBehaviour
 {
+    private ResetCommand r;
     // Start is called before the first frame update
     void Start()
     {
-        
+        r = new ResetCommand(gameObject);
     }
 
     // Update is called once per frame
@@ -20,7 +21,25 @@ public class ActivePieceControl : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-            transform.Rotate(new Vector3(0, 0, 90));
+            rotateCommand(new RotateCommand(gameObject));
+        } else if (Input.GetKeyDown("e"))
+        {
+            undoRotateCommand(new RotateCommand(gameObject));
+        } else if (Input.GetKeyDown("escape")){
+            escapeCommand(r);
         }
+    }
+
+    public void rotateCommand(ICommand command){
+        command.Execute();
+    }
+
+    public void escapeCommand(ICommand command){
+        command.Execute();
+        Destroy(GetComponent("ActivePieceControl"));
+    }
+
+    public void undoRotateCommand(ICommand command){
+        command.Undo();
     }
 }
