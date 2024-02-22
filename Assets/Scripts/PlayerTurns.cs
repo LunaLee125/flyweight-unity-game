@@ -1,5 +1,5 @@
-public enum PlayerTurns 
+public enum PlayerTurns : int
 {
-	Blue,
-	Red,
-}
+	Blue = 1,
+	Red = 2
+};

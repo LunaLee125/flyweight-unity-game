@@ -13,6 +13,10 @@ public class GameOverDisplay : MonoBehaviour, IObserver
 
     }
 
+    public void OnNotify(PlayerTurns p) {
+
+    }
+
     //adds itself to subject's list of observers
     private void OnEnable() {
         _playerSubject.AddObserver(this);

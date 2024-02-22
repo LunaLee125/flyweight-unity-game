@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActivePieceControl : MonoBehaviour
 {
     private ResetCommand r;
+    private bool active = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,10 +15,12 @@ public class ActivePieceControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        mousePos.z = 0;
-        transform.position = mousePos;
+        if(active){
+            Vector3 mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            mousePos.z = 0;
+            transform.position = mousePos;
+        }
 
         if (Input.GetKeyDown("r"))
         {
@@ -28,6 +31,14 @@ public class ActivePieceControl : MonoBehaviour
         } else if (Input.GetKeyDown("escape")){
             escapeCommand(r);
         }
+
+        if(Input.GetMouseButtonDown(0) && active == true){
+            active = false;
+        } else if(Input.GetMouseButtonDown(0) && active == false){
+            active = true;
+        }
+
+        
     }
 
     public void rotateCommand(ICommand command){
