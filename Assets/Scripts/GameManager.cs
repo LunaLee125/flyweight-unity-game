@@ -13,11 +13,17 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI redTurnText;
 
     public Button restartButton;
+    public Button otherRestartButton;
+    public Button playButton;
+    public Button pauseButton;
 
     private char turn;
 
     void Start(){
         restartButton.onClick.AddListener(RestartGame);
+        otherRestartButton.onClick.AddListener(strategyPattern);
+        playButton.onClick.AddListener(strategyPattern);
+        pauseButton.onClick.AddListener(strategyPattern);
         turn = 'R';
     }
 
@@ -62,6 +68,12 @@ public class GameManager : MonoBehaviour
             redTurnText.gameObject.SetActive(true);
             turn = 'R';
         }
+   }
+
+   //context class for strategy pattern
+   public void strategyPattern()
+   {
+
    }
 
    public void RestartGame(){
