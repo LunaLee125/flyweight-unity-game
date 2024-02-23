@@ -10,9 +10,11 @@ public class RotateCommand : ICommand
     }
     public void Execute(){
         o.transform.Rotate(new Vector3(0, 0, 90));
+        o.GetComponent<Block>().rotation += 90;
     }
 
     public void Undo(){
         o.transform.Rotate(new Vector3(0, 0, -90));
+        o.GetComponent<Block>().rotation -= 90;
     }
 }
