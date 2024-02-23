@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Restart : IGameState
 {
-    public void SetState(int state)
+    public void SetState()
     {
-        Time.timeScale = state;
+
     }
 
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 }

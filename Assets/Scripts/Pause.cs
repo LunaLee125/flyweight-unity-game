@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Pause : IGameState
 {
-    public GameObject PauseButton;
 
-    public void SetState(int state)
+    public GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+    public void SetState()
     {
-        Time.timeScale = state;
+        Time.timeScale = 0;
+        gameManager.gameActive = false;
     }
-    // set visibility of button that called this method to false
-    //set visibility of play button to true
-    PauseButton.gameObject.SetActive(false);
-    PlayButton.gameObject.SetActive(true);
+
 }

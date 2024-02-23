@@ -13,70 +13,99 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI redTurnText;
 
     public Button restartButton;
-    public Button otherRestartButton;
     public Button playButton;
     public Button pauseButton;
 
     private char turn;
 
-    void Start(){
+    public bool gameActive;
+
+    public IGameState gameState;
+
+
+    void Start()
+    {
         restartButton.onClick.AddListener(RestartGame);
-        otherRestartButton.onClick.AddListener(strategyPattern);
-        playButton.onClick.AddListener(strategyPattern);
-        pauseButton.onClick.AddListener(strategyPattern);
+        playButton.onClick.AddListener(playPattern);
+        pauseButton.onClick.AddListener(pausePattern);
         turn = 'R';
+        gameActive = true;
     }
 
-    void Update(){
-        
+    void Update()
+    {
+        gameState.SetState();
     }
 
-    public char getTurn(){
+    public char getTurn()
+    {
         return turn;
     }
 
 
-   public void setActiveObject(GameObject gm, bool a){
-        GameObject[] allBlocks;
-        allBlocks = GameObject.FindGameObjectsWithTag("Block");
+    public void setActiveObject(GameObject gm, bool a)
+    {
+        if (gameActive)
+        {
+            GameObject[] allBlocks;
+            allBlocks = GameObject.FindGameObjectsWithTag("Block");
 
-        for (int i = 0; i < allBlocks.Length; i++){
-            if(allBlocks[i]!=null)
-                allBlocks[i].GetComponent<ActivePieceControl>().enabled = false;
+            for (int i = 0; i < allBlocks.Length; i++)
+            {
+                if (allBlocks[i] != null)
+                    allBlocks[i].GetComponent<ActivePieceControl>().enabled = false;
+            }
+
+            Debug.Log("in method");
+            if (gm != null && gm.tag == "Block")
+            {
+                gm.GetComponent<ActivePieceControl>().enabled = a;
+            }
+            else
+            {
+                gm.GetComponent<ActivePieceControl>().enabled = true;
+            }
         }
 
-        Debug.Log("in method");
-        if(gm != null && gm.tag == "Block"){
-            gm.GetComponent<ActivePieceControl>().enabled = a;
-            //gm.GetComponent<ActivePieceControl>().active = true;
-        } else {
-            gm.GetComponent<ActivePieceControl>().enabled = true;
-        }
-        
-   }
 
-   public void switchColorto(char c){
-        if(c == 'B'){
+    }
+
+    public void switchColorto(char c)
+    {
+        if (c == 'B')
+        {
             Debug.Log("BLUE TURN");
             blueTurnText.gameObject.SetActive(true);
             redTurnText.gameObject.SetActive(false);
             turn = 'B';
             return;
-        } else {
+        }
+        else
+        {
             Debug.Log("RED TURN");
             blueTurnText.gameObject.SetActive(false);
             redTurnText.gameObject.SetActive(true);
             turn = 'R';
         }
-   }
+    }
 
-   //context class for strategy pattern
-   public void strategyPattern()
-   {
+    //context class for strategy pattern
+    public void pausePattern()
+    {
+        gameState = new Pause();
+        
+    }
 
-   }
+    public void playPattern()
+    {
+        gameState = new Play();
+        
+    }
 
-   public void RestartGame(){
+    public void RestartGame()
+    {
+       
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
 }

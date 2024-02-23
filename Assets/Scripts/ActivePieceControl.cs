@@ -18,32 +18,35 @@ public class ActivePieceControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        mousePos.z = 0;
+        if(active){
+            Vector3 mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            mousePos.z = 0;
 
-        if(mousePos.x < bt.getxMinBoundary()){
-            mousePos = new Vector3(bt.getxMinBoundary(), mousePos.y, mousePos.z);
-        }
+            if(mousePos.x < bt.getxMinBoundary()){
+                mousePos = new Vector3(bt.getxMinBoundary(), mousePos.y, mousePos.z);
+            }
 
-        if(mousePos.x > bt.getxMaxBoundary()){
-            mousePos = new Vector3(bt.getxMaxBoundary(), mousePos.y, mousePos.z);
-        }
+            if(mousePos.x > bt.getxMaxBoundary()){
+                mousePos = new Vector3(bt.getxMaxBoundary(), mousePos.y, mousePos.z);
+            }
 
-        gameObject.transform.position = mousePos;
+            gameObject.transform.position = mousePos;
 
-        if (Input.GetKeyDown("r"))
-        {
-            rotateCommand(new RotateCommand(gameObject));
-        }
-        else if (Input.GetKeyDown("e"))
-        {
-            undoRotateCommand(new RotateCommand(gameObject));
-        }
-        else if (Input.GetKeyDown("escape"))
-        {
-            escapeCommand(r);
-        }
+            if (Input.GetKeyDown("r"))
+            {
+                rotateCommand(new RotateCommand(gameObject));
+            }
+            else if (Input.GetKeyDown("e"))
+            {
+                undoRotateCommand(new RotateCommand(gameObject));
+            }
+            else if (Input.GetKeyDown("escape"))
+            {
+                escapeCommand(r);
+            }
+            }
+        
     }
 
     public void checkActive(bool active)
