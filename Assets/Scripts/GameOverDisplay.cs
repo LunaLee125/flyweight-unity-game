@@ -13,7 +13,7 @@ public class GameOverDisplay : MonoBehaviour, IObserver
 
     }
 
-    public void OnNotify(PlayerTurns p) {
+    public void OnNotify(char p) {
 
     }
 

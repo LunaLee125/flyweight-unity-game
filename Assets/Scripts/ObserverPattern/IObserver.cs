@@ -2,7 +2,7 @@
 
 public interface IObserver 
 {
-	public void OnNotify(PlayerTurns x);
+	public void OnNotify(char x);
 
 	public void OnNotify(EndStates x);
 }

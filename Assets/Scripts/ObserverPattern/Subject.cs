@@ -16,7 +16,7 @@ public class Subject : MonoBehaviour
     }
 
     //notifies each observer
-    protected void NotifyObservers(PlayerTurns turn) {
+    protected void NotifyObservers(char turn) {
         _observers.ForEach((_observer) => {
             _observer.OnNotify(turn);
         });
