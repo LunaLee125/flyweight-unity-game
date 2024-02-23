@@ -7,15 +7,20 @@ public class Block : MonoBehaviour
 
     [SerializeField] private BlockSO blockData;
     //intrinsic data: 
-    public int scale; 
+    private int scale; 
+    private int xMinBoundary;
+    private int xMaxBoundary;
+    private int yMinBoundary;
+    private int yMaxBoundary;
+    private ActivePieceControl apc;
 
     //extrinsic data:
     public SpriteRenderer sprite; // color of sprite
     public int rotation;
     public bool active; //checks if piece is active
-    public ActivePieceControl apc;
 
-    public Block (ActivePieceControl apc, int scale){
+
+    public Block (ActivePieceControl apc, int scale, int xMinBoundary, int xMaxBoundary, int yMinBoundary, int yMaxBoundary){
         this.apc = apc;
         this.scale = blockData.Scale;
     }
