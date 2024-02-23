@@ -12,10 +12,12 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI blueTurnText;
     public TextMeshProUGUI redTurnText;
 
+    public Button restartButton;
+
     private char turn;
 
     void Start(){
-        Debug.Log("creating manager");
+        restartButton.onClick.AddListener(RestartGame);
         turn = 'R';
     }
 
@@ -61,4 +63,8 @@ public class GameManager : MonoBehaviour
             turn = 'R';
         }
    }
+
+   public void RestartGame(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
